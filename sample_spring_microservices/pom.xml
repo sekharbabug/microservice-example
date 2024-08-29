@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>sample_spring_microservices</groupId>
+	<artifactId>sample_spring_microservices</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>sample_spring_microservices</name>
+	<description>sample_spring_microservices</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>17</release>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>eurekadiscovery</module>
+		<module>account-service</module>
+		<module>customer-service</module>
+		<module>gcpdemo</module>
+		<module>gateway-service</module>
+	</modules>
+	<packaging>pom</packaging>
+</project>
