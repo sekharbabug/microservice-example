@@ -1,0 +1,73 @@
+version: '3.5'
+services:
+  discovery:
+    image: srdockerhub2/eurekadiscovery
+    container_name: eurekadsicovery
+    build:
+      context: ./eurekadsicovery
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  gateway:
+    image: srdockerhub2/gateway-service
+    container_name: service-gateway
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+    links:
+      - discovery
+
+  gcpdemo:
+    image: srdockerhub2/gcpdemo
+    container_name: gcpdemo
+    build:
+      context: ./gcpdemo
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+    links:
+      - discovery
+  account-service:
+    image: srdockerhub2/account-service
+    container_name: account-service
+    build:
+      context: ./account-service
+      dockerfile: Dockerfile
+    ports:
+      - "2222:2222"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+    links:
+      - discovery
+
+  customer-service:
+    image: srdockerhub2/customer-service
+    container_name: customer-service
+    build:
+      context: ./customer-service
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+    links:
+      - discovery
+  resilience4j-demo:
+    image: srdockerhub2/resilience4j-demo
+    container_name: resilience4j-demo
+    build:
+      context: ./resilience4j-demo
+      dockerfile: Dockerfile
+    ports:
+      - "7878:7878"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+    links:
+      - discovery
